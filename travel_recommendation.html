@@ -1,41 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>LouKam Agency</title>
-  <link rel="stylesheet" href="./travel_recommendation.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loukam Travel</title>
+<link rel="stylesheet" href="travel_recommendation.css">
+<script defer src="travel_recommendation.js"></script>
+<!-- Icônes réseaux sociaux -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body background=
-"./background.jpg">
-
-   <nav><h1>LouKam Travel Agency</h1>
-<ul>
-  <li><a href="./travel_reco_home.html" id="home">Home </a></li>
-  <li><a href="./travel_reco_about_us.html" id="about">About Us </a></li>
-  <li><a href="./travel_reco_contact.html" id="contact">Contact Us </a></li>
-  <li><input type="text" id="conditionInput" placeholder="Enter a destination or keyword">  </li>
-  <li><button id='btnSearch'>Search</button>
-  <li><button id='btnClear'>Clear</button>
-  </li>
-
+<body>
+<header>
+<nav class="navbar">
+<div class="logo">Loukam travel agency</div>
+<ul class="nav-links">
+<li><a href="travel_recommendation.html">Home</a></li>
+<li><a href="travel_recommendation_about.html">About Us</a></li>
+<li><a href="travel_recommendation_contact.html">Contact Us</a></li>
 </ul>
+<div class="search-bar">
+<input type="text" id="searchInput" placeholder="Enter a destination or keyword">
+<button id="searchBtn">Search</button>
+<button id="clearBtn">Clear</button>
+</div>
 </nav>
+</header>
 
-<div class="container">
-<div class="analysisForm">
-
-<h2>EXPLORE DREAM DESTINATION</h2>
+<section class="hero">
+<div class="overlay"></div>
+<div class="hero-content">
+<h1>EXPLORE<br>DREAM<br>DESTINATION</h1>
 <p>It encourages exploration of unfamiliar territories, embracing diverse cultures and landscapes, while pursuing the desired destination that captivates the heart and ignites a sense of wonder.</p>
-<button id='btnBook'>BOOK NOW</button>
+<button class="book-btn">BOOK NOW</button>
+</div>
 
-<!-- Add icon library -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<!-- Add font awesome icons -->
-<a href="#" class="fa fa-facebook"></a>
-<a href="#" class="fa fa-twitter"></a>
-
-<script src="./travel_recommendationndation.js"></
-script>
+<div class="social-icons">
+<a href="#"><i class="fab fa-facebook-f"></i></a>
+<a href="#"><i class="fab fa-instagram"></i></a>
+<a href="#"><i class="fab fa-twitter"></i></a>
+<a href="#"><i class="fab fa-youtube"></i></a>
+</div>
+</section>
 </body>
 </html>
