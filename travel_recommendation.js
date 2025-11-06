@@ -27,59 +27,78 @@ fetch('travel_recommendation_api.json')
 
  function searchDestinations(keyword) {
     const searchTerm = keyword.toLowerCase().trim();
-   
+
     fetch('travel_recommendation_api.json')
-    .then(response => {
-    if (!response.ok) {
-    throw new Error('Erreur lors du chargement du fichier JSON');
-    }
-    return response.json();
-    })
-    .then(data => {
-    const resultsContainer = document.getElementById('results');
-    resultsContainer.innerHTML = '';
-   
-    if (!data.cities || data.cities.length === 0) {
-    resultsContainer.innerHTML = '<p>Aucune donnée disponible.</p>';
-    return;
-    }
-   
-    const results = data.cities.filter(city =>
-    city.name.toLowerCase().includes(searchTerm) ||
-    (city.country && city.country.toLowerCase().includes(searchTerm)) ||
-    (city.description && city.description.toLowerCase().includes(searchTerm))
-    );
-   
-    if (results.length > 0) {
-    results.forEach(city => {
-    const card = document.createElement('div');
-    card.classList.add('city-card');
-   
-    // Image (affichée seulement si elle existe dans le JSON)
-    const imageHTML = city.image
-    ? `<img src="${city.image}" alt="${city.name}">`
-    : `<div class="no-image">No image available</div>`;
-   
-    card.innerHTML = `
-    ${imageHTML}
-    <div class="city-info">
-    <h3>${city.name}</h3>
-    <p><strong>Pays :</strong> ${city.country}</p>
-    <p>${city.description}</p>
-    </div>
-    `;
-    resultsContainer.appendChild(card);
-    });
-    } else {
-    resultsContainer.innerHTML = `<p>Aucun résultat trouvé pour "<strong>${keyword}</strong>".</p>`;
-    }
-    })
-    .catch(error => {
-    console.error('Erreur :', error);
-    document.getElementById('results').innerHTML =
-    '<p>Une erreur est survenue lors du chargement des données.</p>';
-    });
-   }
+        .then(response => response.json())
+        .then(data => {
+            const resultsContainer = document.getElementById('results');
+            resultsContainer.innerHTML = "";
+            document.getElementById("results").style.display = "block";
+            document.getElementById("results-title").style.display = "block";
+
+
+            // ✅ 1. Collecter toutes les villes
+            let allCities = [];
+
+            if (data.countries) {
+                data.countries.forEach(country => {
+                    country.cities.forEach(city => {
+                        allCities.push({
+                            name: city.name,
+                            country: country.name,
+                            description: city.description,
+                            image: city.image
+                        });
+                    });
+                });
+            }
+
+            // ✅ 2. Ajouter aussi les temples et plages si tu veux
+            let allDestinations = [...allCities];
+
+            if (data.temples) {
+                allDestinations.push(...data.temples);
+            }
+
+            if (data.beaches) {
+                allDestinations.push(...data.beaches);
+            }
+
+            // ✅ 3. Filtrer selon la recherche
+            const results = allDestinations.filter(dest =>
+                dest.name.toLowerCase().includes(searchTerm) ||
+                (dest.country && dest.country.toLowerCase().includes(searchTerm)) ||
+                (dest.description && dest.description.toLowerCase().includes(searchTerm))
+            );
+
+            // ✅ 4. Affichage
+            if (results.length > 0) {
+                results.forEach(dest => {
+                    const card = document.createElement("div");
+                    card.classList.add("city-card");
+
+                    card.innerHTML = `
+                        <img src="${dest.image}" alt="${dest.name}">
+                        <div class="city-info">
+                            <h3>${dest.name}</h3>
+                            ${dest.country ? `<p><strong>Pays :</strong> ${dest.country}</p>` : ""}
+                            <p>${dest.description}</p>
+                        </div>
+                    `;
+                    resultsContainer.appendChild(card);
+                });
+            } else {
+                resultsContainer.innerHTML = `<p>Aucun résultat trouvé pour "<strong>${keyword}</strong>".</p>`;
+            }
+        })
+        .catch(error => {
+            console.error("Erreur JSON :", error);
+            document.getElementById("results").innerHTML =
+                "<p>Erreur lors du chargement des données.</p>";
+        });
+}
+
+
    
    // Lancer la recherche via le bouton
    document.getElementById('searchBtn').addEventListener('click', () => {
@@ -97,3 +116,19 @@ fetch('travel_recommendation_api.json')
     document.getElementById('searchBtn').click();
     }
    });
+
+   function clearSearch() {
+    // Efface le texte du champ de recherche
+    document.getElementById("searchInput").value = "";
+
+    // Efface l'affichage des résultats
+    const results = document.getElementById("results");
+    results.innerHTML = "";
+    results.style.display = "none";
+
+    // Cache le titre des résultats si tu en as un
+    const title = document.getElementById("results-title");
+    if (title) title.style.display = "none";
+}
+document.getElementById("clearBtn").addEventListener("click", clearSearch);
+

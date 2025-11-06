@@ -4,44 +4,73 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Loukam Travel</title>
+
 <link rel="stylesheet" href="travel_recommendation.css">
-<script defer src="travel_recommendation.js"></script>
-<!-- Icônes réseaux sociaux -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
 <body>
+
+<!-- ================= NAVBAR ================= -->
 <header>
-<nav class="navbar">
-<div class="logo">Loukam Travel Agency</div>
-<ul class="nav-links">
-<li><a href="travel_recommendation.html">Home</a></li>
-<li><a href="travel_recommendation_about.html">About Us</a></li>
-<li><a href="travel_recommendation_contact.html">Contact Us</a></li>
-</ul>
-<div class="search-bar">
-<input type="text" id="searchInput" placeholder="Enter a destination or keyword">
-<button id="searchBtn">Search</button>
-<button id="clearBtn">Clear</button>
-</div>
-<div class="searchDestinations">
-    <div id="result"></div>
-</nav>
+    <nav class="navbar">
+
+        <div class="logo">Loukam Travel Agency</div>
+
+        <ul class="nav-links">
+            <li><a href="travel_recommendation.html">Home</a></li>
+            <li><a href="travel_recommendation_about.html">About Us</a></li>
+            <li><a href="travel_recommendation_contact.html">Contact Us</a></li>
+        </ul>
+
+        <!-- ✅ Barre de recherche conforme au CSS -->
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Enter a destination or keyword">
+            <button id="searchBtn">Search</button>
+            <button id="clearBtn">Clear</button>
+        </div>
+
+    </nav>
 </header>
 
-<section class="hero">
-<div class="overlay"></div>
-<div class="hero-content">
-<h1>EXPLORE<br>DREAM<br>DESTINATION</h1>
-<p>It encourages exploration of unfamiliar territories, embracing diverse cultures and landscapes, while pursuing the desired destination that captivates the heart and ignites a sense of wonder.</p>
-<button class="book-btn">BOOK NOW</button>
-</div>
+<!-- ================= LAYOUT GLOBAL ================= -->
+<div class="layout-container">
 
-<div class="social-icons">
-<a href="#"><i class="fab fa-facebook-f"></i></a>
-<a href="#"><i class="fab fa-instagram"></i></a>
-<a href="#"><i class="fab fa-twitter"></i></a>
-<a href="#"><i class="fab fa-youtube"></i></a>
-</div>
-</section>
+    <!-- ================= ZONE GAUCHE (Hero) ================= -->
+    <div class="main-left">
+
+        <section class="hero">
+            <div class="overlay"></div>
+
+            <div class="hero-content">
+                <h1>EXPLORE<br>DREAM<br>DESTINATION</h1>
+                <p>It encourages exploration of unfamiliar territories, embracing diverse cultures and landscapes.</p>
+                <button class="book-btn">BOOK NOW</button>
+            </div>
+
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ================= SIDEBAR RÉSULTATS ================= -->
+    <aside class="results-panel">
+
+        <h3 id="results-title" style="display:none;">Résultats</h3>
+
+        <div id="results"></div>
+
+    </aside>
+
+</div> <!-- END layout-container -->
+
+<!-- ================= JS ================= -->
+<script src="travel_recommendation.js"></script>
+
 </body>
 </html>
